@@ -1,0 +1,72 @@
+/* Modal Component */
+
+/* ── Overlay ────────────────────────────────────────────── */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(16, 18, 17, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: var(--space-4);
+}
+
+/* Hidden by default — toggle with JS */
+.modal-overlay:not(.is-open) {
+  display: none;
+}
+
+/* ── Dialog ─────────────────────────────────────────────── */
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: 480px;
+  padding: var(--padding-modal);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-modal);
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+.modal__title {
+  font-family: var(--font-body);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-h3);
+  color: var(--color-cream);
+  margin: 0;
+}
+
+/* ── Body ───────────────────────────────────────────────── */
+
+.modal__body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-body);
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* ── Divider ────────────────────────────────────────────── */
+
+.modal__divider {
+  border: none;
+  border-top: 1px solid rgba(231, 212, 187, 0.10);
+  margin: 0;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+
+.modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}

@@ -1,0 +1,126 @@
+/* Design Tokens 
+   Source: Figma design system (Foundations page)
+   Generated from: colour palette, typography scale, spacing scale,
+                   border radius, and component spec.
+   ------------------------------------------------------------ */
+
+:root {
+
+  /* ── Colour ───────────────────────────────────────────── */
+
+  --color-primary:      #48252F;   /* Burgundy */
+  --color-accent:       #857861;   /* Khaki */
+  --color-background:   #101211;   /* Near-black, warm undertone */
+  --color-surface:      #292818;   /* Card / panel surface */
+  --color-surface-2:    #32301F;   /* Elevated surface */
+  --color-cream:        #E7D4BB;   /* Primary text */
+  --color-muted:        #6B6050;   /* Secondary text / placeholders */
+  --color-border:       rgba(133, 120, 97, 0.15); /* Accent at 15% */
+  --color-danger:       #C0392B;
+  --color-warning:      #C8923A;
+  --color-success:      #6B8C5A;
+
+  /* Semantic aliases */
+  --color-text:         var(--color-cream);
+  --color-text-muted:   var(--color-muted);
+  --color-bg:           var(--color-background);
+  --color-surface-border: rgba(133, 120, 97, 0.20);
+
+  /* ── Typography — families ────────────────────────────── */
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
+
+  /* Weights */
+  --font-weight-light:   300;
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+
+  /* Scale */
+  --text-display: 56px;
+  --text-h1:      40px;
+  --text-h2:      30px;
+  --text-h3:      22px;
+  --text-h4:      18px;
+  --text-body:    16px;
+  --text-small:   13px;
+  --text-caption: 11px;
+  --text-label:   11px;
+
+  /* Line heights */
+  --leading-display: 1.05;
+  --leading-h1:      1.1;
+  --leading-h2:      1.2;
+  --leading-h3:      1.3;
+  --leading-h4:      1.4;
+  --leading-body:    1.75;
+  --leading-small:   1.65;
+  --leading-caption: 1.5;
+  --leading-label:   1.5;
+
+  /* Letter spacing */
+  --tracking-display: -0.02em;
+  --tracking-caption:  0.06em;
+  --tracking-label:    0.10em;
+
+  /* ── Spacing ──────────────────────────────────────────── */
+
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  20px;
+  --space-5:  32px;
+  --space-6:  48px;
+  --space-7:  64px;
+  --space-8:  80px;
+  --space-9: 120px;
+  --space-10:160px;
+
+  /* Common aliases */
+  --space-xs:  var(--space-1);   /*   4px */
+  --space-sm:  var(--space-2);   /*   8px */
+  --space-md:  var(--space-4);   /*  20px */
+  --space-lg:  var(--space-5);   /*  32px */
+  --space-xl:  var(--space-6);   /*  48px */
+  --space-2xl: var(--space-8);   /*  80px */
+  --space-3xl: var(--space-10);  /* 160px */
+
+  /* Component-specific */
+  --padding-button-x: 20px;
+  --padding-card:     28px;
+  --padding-modal:    36px;
+  --padding-input-x:  12px;
+
+  /* ── Border radius ────────────────────────────────────── */
+
+  --radius-none: 0px;
+  --radius-xs:   2px;   /* buttons, badges, inputs — intentionally sharp */
+  --radius-sm:   4px;   /* toasts */
+  --radius-md:   6px;   /* cards, modals */
+  --radius-lg:  10px;
+  --radius-full: 9999px; /* avatars, pills */
+
+  /* ── Shadows ──────────────────────────────────────────── */
+
+  --shadow-toast: 0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-modal: 0 8px 40px rgba(0, 0, 0, 0.55);
+
+  /* ── Component sizing ────────────────────────────────── */
+
+  --btn-height-sm: 32px;
+  --btn-height-md: 40px;
+  --btn-height-lg: 48px;
+
+  --input-height:  40px;
+  --nav-height:    68px;
+
+  /* ── Borders ──────────────────────────────────────────── */
+
+  --border-default:   1px solid var(--color-border);
+  --border-surface:   1px solid rgba(133, 120, 97, 0.20);
+  --border-input:     1px solid rgba(133, 120, 97, 0.30);
+  --border-focused:   1px solid var(--color-accent);
+  --border-error:     1px solid var(--color-danger);
+  --border-nav:       1px solid rgba(133, 120, 97, 0.15);
+
+}

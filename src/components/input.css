@@ -1,0 +1,71 @@
+/* Input Component */
+
+/* ── Form group (label + input + helper) ────────────────── */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* ── Label ──────────────────────────────────────────────── */
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-cream);
+}
+
+/* ── Input ──────────────────────────────────────────────── */
+
+.input {
+  display: block;
+  width: 100%;
+  height: var(--input-height);
+  padding: 0 var(--padding-input-x);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-cream);
+  background-color: var(--color-surface);
+  border: var(--border-input);
+  border-radius: var(--radius-xs);
+  outline: none;
+  transition: border-color 120ms ease;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+/* States */
+.input:focus {
+  border: var(--border-focused);
+}
+
+.input--error {
+  border: var(--border-error);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Helper / error text ────────────────────────────────── */
+
+.form-helper {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-caption);
+  color: var(--color-muted);
+}
+
+.form-helper--error {
+  color: var(--color-danger);
+}

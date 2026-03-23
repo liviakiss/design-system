@@ -1,0 +1,214 @@
+/* Animations & Interactions
+   Requires: tokens.css
+   Companion JS: src/interactions.js
+   ------------------------------------------------------------ */
+
+/* ── Respect reduced-motion preference ──────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   1. MAGNETIC CURSOR
+   Transform is applied via JS. CSS provides the easing hint.
+   ══════════════════════════════════════════════════════════ */
+
+.btn--primary,
+.card {
+  will-change: transform;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   2. LIQUID GRADIENT BORDER
+   Animatable custom property — requires @property (Chrome 85+,
+   Safari 16.4+). Falls back to a static border elsewhere.
+   ══════════════════════════════════════════════════════════ */
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes liquid-border {
+  to { --border-angle: 360deg; }
+}
+
+/* Shared mask trick: conic gradient clipped to a 1 px ring */
+.input-wrapper::before,
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle),
+    #48252F,
+    #857861,
+    #E7D4BB,
+    #857861,
+    #48252F
+  );
+  /* Hollow mask — only the 1 px padding strip remains visible */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Input wrapper ──────────────────────────────────────── */
+
+/*
+  Wrap <input class="input"> inside <div class="input-wrapper">
+  Pseudo-elements don't work on replaced elements like <input>.
+*/
+.input-wrapper {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-xs);
+}
+
+.input-wrapper:focus-within::before {
+  opacity: 1;
+  animation: liquid-border 4s linear infinite;
+}
+
+/* Suppress native focus border once the gradient takes over */
+.input-wrapper:focus-within .input {
+  border-color: transparent;
+  outline: none;
+}
+
+/* ── Card active state ──────────────────────────────────── */
+
+.card {
+  position: relative;
+  z-index: 0;
+}
+
+.card.active::before {
+  opacity: 1;
+  animation: liquid-border 4s linear infinite;
+}
+
+/* Suppress static border while gradient is active */
+.card.active {
+  border-color: transparent;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   3. WARM INK REVEAL
+   Applied by JS via IntersectionObserver. Each heading gets
+   .ink-reveal on init, .is-visible when it enters viewport.
+   ══════════════════════════════════════════════════════════ */
+
+@keyframes ink-sweep {
+  to { background-position: 0% 0%; }
+}
+
+.ink-reveal {
+  /* Text colour is painted by the background gradient */
+  background: linear-gradient(
+    90deg,
+    var(--color-cream) 50%,
+    transparent       50%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0%;   /* Start: gradient is fully right → text invisible */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* Hold invisible until observer fires */
+  animation: none;
+}
+
+.ink-reveal.is-visible {
+  animation: ink-sweep 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--stagger-delay, 0ms);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   4. SURFACE SHIMMER — card hover
+   ::after sweeps a diagonal highlight across the card once
+   per hover. Contained by overflow: hidden on .card.
+   ══════════════════════════════════════════════════════════ */
+
+@keyframes shimmer {
+  from { left: -80%;  }
+  to   { left: 160%;  }
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent                   30%,
+    rgba(231, 212, 187, 0.06)     50%,
+    transparent                   70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover::after {
+  animation: shimmer 700ms ease-in-out forwards;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   5. BUTTON RIPPLE
+   .btn__ripple is injected by JS at the click coordinate.
+   ══════════════════════════════════════════════════════════ */
+
+/* Needed so the ripple is clipped to the button shape */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes ripple-expand {
+  from {
+    transform: scale(0);
+    opacity: 0.3;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.btn__ripple {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(231, 212, 187, 0.35);
+  transform: scale(0);
+  pointer-events: none;
+  animation: ripple-expand 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}

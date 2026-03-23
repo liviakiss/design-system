@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System</title>
+
+  <!-- 1. Reset -->
+  <link rel="stylesheet" href="src/utils/reset.css" />
+
+  <!-- 2. Design Tokens -->
+  <link rel="stylesheet" href="src/tokens.css" />
+
+  <!-- 3. Utilities -->
+  <link rel="stylesheet" href="src/utils/typography.css" />
+  <link rel="stylesheet" href="src/utils/spacing.css" />
+  <link rel="stylesheet" href="src/utils/animations.css" />
+
+  <!-- 4. Components -->
+  <link rel="stylesheet" href="src/components/button.css" />
+  <link rel="stylesheet" href="src/components/input.css" />
+  <link rel="stylesheet" href="src/components/card.css" />
+  <link rel="stylesheet" href="src/components/badge.css" />
+  <link rel="stylesheet" href="src/components/navigation.css" />
+  <link rel="stylesheet" href="src/components/modal.css" />
+  <link rel="stylesheet" href="src/components/toast.css" />
+
+  <style>
+    /* ── Page shell ──────────────────────────────────────── */
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-background);
+      color: var(--color-cream);
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+    }
+
+    /* ── Layout ──────────────────────────────────────────── */
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 var(--space-8);
+    }
+
+    .section {
+      padding: var(--space-9) 0;
+      border-bottom: 1px solid rgba(133, 120, 97, 0.12);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    /* ── Section header ──────────────────────────────────── */
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: var(--text-label);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(133, 120, 97, 0.15);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h2);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--leading-h2);
+      color: var(--color-cream);
+      margin-bottom: var(--space-5);
+    }
+
+    /* ── Hero ────────────────────────────────────────────── */
+
+    .hero {
+      padding: 160px 0 var(--space-9);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .hero__eyebrow {
+      font-family: var(--font-body);
+      font-size: var(--text-label);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: var(--text-display);
+      font-weight: var(--font-weight-light);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-display);
+      color: var(--color-cream);
+      max-width: 720px;
+    }
+
+    .hero__sub {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--leading-body);
+      color: var(--color-muted);
+      max-width: 480px;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+    }
+
+    /* ── Colour swatches ─────────────────────────────────── */
+
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .swatch__color {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+    }
+
+    .swatch__name {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: var(--font-weight-medium);
+      color: var(--color-cream);
+    }
+
+    .swatch__hex {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+
+    /* ── Typography specimens ────────────────────────────── */
+
+    .type-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .type-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      align-items: baseline;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid rgba(133, 120, 97, 0.08);
+    }
+
+    .type-row:last-child {
+      border-bottom: none;
+    }
+
+    .type-tag {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding-top: 4px;
+    }
+
+    /* ── Spacing scale ───────────────────────────────────── */
+
+    .spacing-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .spacing-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--color-muted);
+      width: 44px;
+      flex-shrink: 0;
+    }
+
+    .spacing-bar {
+      height: 4px;
+      background: rgba(231, 212, 187, 0.25);
+      border-radius: 2px;
+    }
+
+    /* ── Component rows ──────────────────────────────────── */
+
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .component-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .component-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .group-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: var(--font-weight-regular);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    /* ── Two-column layout ───────────────────────────────── */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+    }
+
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* ── Card grid ───────────────────────────────────────── */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4);
+      align-items: start;
+    }
+
+    /* ── Radius demos ────────────────────────────────────── */
+
+    .radius-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-5);
+      align-items: flex-end;
+    }
+
+    .radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .radius-box {
+      width: 64px;
+      height: 64px;
+      background: var(--color-surface-2);
+      border: 1px solid rgba(133, 120, 97, 0.3);
+    }
+
+    .radius-name {
+      font-size: 11px;
+      color: var(--color-muted);
+      text-align: center;
+    }
+
+    /* ── Nav demo wrapper ────────────────────────────────── */
+
+    .nav-demo {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(133, 120, 97, 0.15);
+    }
+
+    .nav-demo .nav {
+      position: static;
+    }
+
+    /* ── Toast trigger row ───────────────────────────────── */
+
+    .toast-triggers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    /* ── Divider demos ───────────────────────────────────── */
+
+    .divider-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .demo-hr {
+      border: none;
+      border-top: 1px solid rgba(231, 212, 187, 0.15);
+    }
+
+    .demo-decorative {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--color-muted);
+      font-size: 10px;
+    }
+
+    .demo-decorative::before,
+    .demo-decorative::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(231, 212, 187, 0.15);
+    }
+
+    /* ── Avatar demos ────────────────────────────────────── */
+
+    .avatar-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-2);
+      border: 1px solid rgba(133, 120, 97, 0.5);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-cream);
+      flex-shrink: 0;
+    }
+
+    .avatar--sm { width: 32px; height: 32px; font-size: 11px; }
+    .avatar--md { width: 40px; height: 40px; font-size: 13px; }
+    .avatar--lg { width: 56px; height: 56px; font-size: 17px; }
+
+    .avatar--photo {
+      background: var(--color-muted);
+      border-color: rgba(133, 120, 97, 0.3);
+      font-size: 9px;
+      color: rgba(231, 212, 187, 0.6);
+    }
+
+    /* ── Interactive card active toggle ──────────────────── */
+
+    .card.active {
+      cursor: pointer;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+
+    .footer {
+      padding: var(--space-8) 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(133, 120, 97, 0.12);
+    }
+
+    .footer__copy {
+      font-size: var(--text-caption);
+      color: var(--color-muted);
+      letter-spacing: var(--tracking-caption);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <a class="nav__logo" href="#">DS</a>
+    <ul class="nav__links">
+      <li><a class="nav__link" href="#colour">Colour</a></li>
+      <li><a class="nav__link" href="#typography">Type</a></li>
+      <li><a class="nav__link" href="#spacing">Spacing</a></li>
+      <li><a class="nav__link" href="#components">Components</a></li>
+    </ul>
+    <button class="btn btn--primary btn--sm" id="open-modal-nav">Open modal</button>
+  </nav>
+
+  <main class="page">
+
+    <!-- ══════════════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════════════ -->
+    <div class="hero">
+      <span class="hero__eyebrow">Design System</span>
+      <h1 class="hero__title">The quiet art<br>of making things.</h1>
+      <p class="hero__sub">
+        A complete design system built on warm contrast, generous whitespace,
+        and refined typography. Dark. Breathable. Alive.
+      </p>
+      <div class="hero__actions">
+        <button class="btn btn--primary">Get started</button>
+        <button class="btn btn--secondary">View on Figma</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         COLOUR
+    ══════════════════════════════════════════════════ -->
+    <section class="section" id="colour">
+      <p class="section-label">Colour tokens</p>
+
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch__color" style="background:#48252F; border:1px solid rgba(133,120,97,0.2)"></div>
+          <span class="swatch__name">Primary</span>
+          <span class="swatch__hex">#48252F</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#857861"></div>
+          <span class="swatch__name">Accent</span>
+          <span class="swatch__hex">#857861</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#101211; border:1px solid rgba(133,120,97,0.15)"></div>
+          <span class="swatch__name">Background</span>
+          <span class="swatch__hex">#101211</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#292818"></div>
+          <span class="swatch__name">Surface</span>
+          <span class="swatch__hex">#292818</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#32301F"></div>
+          <span class="swatch__name">Surface 2</span>
+          <span class="swatch__hex">#32301F</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#E7D4BB"></div>
+          <span class="swatch__name">Cream</span>
+          <span class="swatch__hex">#E7D4BB</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#6B6050"></div>
+          <span class="swatch__name">Muted</span>
+          <span class="swatch__hex">#6B6050</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#C0392B"></div>
+          <span class="swatch__name">Danger</span>
+          <span class="swatch__hex">#C0392B</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#C8923A"></div>
+          <span class="swatch__name">Warning</span>
+          <span class="swatch__hex">#C8923A</span>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background:#6B8C5A"></div>
+          <span class="swatch__name">Success</span>
+          <span class="swatch__hex">#6B8C5A</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         TYPOGRAPHY
+    ══════════════════════════════════════════════════ -->
+    <section class="section" id="typography">
+      <p class="section-label">Typography scale</p>
+
+      <div class="type-stack">
+
+        <div class="type-row">
+          <span class="type-tag">Display</span>
+          <h1 style="font-family:var(--font-display); font-size:var(--text-display); font-weight:var(--font-weight-light); line-height:var(--leading-display); letter-spacing:var(--tracking-display); color:var(--color-cream)">
+            The quiet art of making
+          </h1>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">H1</span>
+          <h1 style="font-family:var(--font-display); font-size:var(--text-h1); font-weight:var(--font-weight-regular); line-height:var(--leading-h1); color:var(--color-cream)">
+            The quiet art of making
+          </h1>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">H2</span>
+          <h2 style="font-family:var(--font-display); font-size:var(--text-h2); font-weight:var(--font-weight-regular); line-height:var(--leading-h2); color:var(--color-cream)">
+            The quiet art of making
+          </h2>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">H3</span>
+          <h3 style="font-family:var(--font-body); font-size:var(--text-h3); font-weight:var(--font-weight-medium); line-height:var(--leading-h3); color:var(--color-cream)">
+            The quiet art of making
+          </h3>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">H4</span>
+          <h4 style="font-family:var(--font-body); font-size:var(--text-h4); font-weight:var(--font-weight-medium); line-height:var(--leading-h4); color:var(--color-cream)">
+            The quiet art of making
+          </h4>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">Body</span>
+          <p style="font-family:var(--font-body); font-size:var(--text-body); font-weight:var(--font-weight-regular); line-height:var(--leading-body); color:var(--color-cream)">
+            The quiet art of making
+          </p>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">Small</span>
+          <p style="font-family:var(--font-body); font-size:var(--text-small); font-weight:var(--font-weight-regular); line-height:var(--leading-small); color:var(--color-cream)">
+            The quiet art of making
+          </p>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">Caption</span>
+          <p style="font-family:var(--font-body); font-size:var(--text-caption); font-weight:var(--font-weight-regular); line-height:var(--leading-caption); letter-spacing:var(--tracking-caption); color:var(--color-cream)">
+            The quiet art of making
+          </p>
+        </div>
+
+        <div class="type-row">
+          <span class="type-tag">Label</span>
+          <p style="font-family:var(--font-body); font-size:var(--text-label); font-weight:var(--font-weight-medium); line-height:var(--leading-label); letter-spacing:var(--tracking-label); text-transform:uppercase; color:var(--color-cream)">
+            The quiet art of making
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SPACING + BORDER RADIUS
+    ══════════════════════════════════════════════════ -->
+    <section class="section" id="spacing">
+      <p class="section-label">Spacing &amp; radius</p>
+
+      <div class="two-col">
+
+        <!-- Spacing scale -->
+        <div>
+          <h3 class="section-title" style="font-size:var(--text-h4); font-family:var(--font-body); margin-bottom:var(--space-4)">Spacing scale</h3>
+          <div class="spacing-list">
+            <div class="spacing-row"><span class="spacing-label">4px</span>  <div class="spacing-bar" style="width:4px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">8px</span>  <div class="spacing-bar" style="width:8px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">12px</span> <div class="spacing-bar" style="width:12px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">20px</span> <div class="spacing-bar" style="width:20px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">32px</span> <div class="spacing-bar" style="width:32px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">48px</span> <div class="spacing-bar" style="width:48px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">64px</span> <div class="spacing-bar" style="width:64px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">80px</span> <div class="spacing-bar" style="width:80px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">120px</span><div class="spacing-bar" style="width:120px"></div></div>
+            <div class="spacing-row"><span class="spacing-label">160px</span><div class="spacing-bar" style="width:160px"></div></div>
+          </div>
+        </div>
+
+        <!-- Border radius -->
+        <div>
+          <h3 class="section-title" style="font-size:var(--text-h4); font-family:var(--font-body); margin-bottom:var(--space-4)">Border radius</h3>
+          <div class="radius-row">
+            <div class="radius-item">
+              <div class="radius-box" style="border-radius:0"></div>
+              <span class="radius-name">none<br>0px</span>
+            </div>
+            <div class="radius-item">
+              <div class="radius-box" style="border-radius:2px"></div>
+              <span class="radius-name">xs<br>2px</span>
+            </div>
+            <div class="radius-item">
+              <div class="radius-box" style="border-radius:4px"></div>
+              <span class="radius-name">sm<br>4px</span>
+            </div>
+            <div class="radius-item">
+              <div class="radius-box" style="border-radius:6px"></div>
+              <span class="radius-name">md<br>6px</span>
+            </div>
+            <div class="radius-item">
+              <div class="radius-box" style="border-radius:10px"></div>
+              <span class="radius-name">lg<br>10px</span>
+            </div>
+            <div class="radius-item">
+              <div class="radius-box" style="border-radius:9999px"></div>
+              <span class="radius-name">full<br>9999px</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         COMPONENTS
+    ══════════════════════════════════════════════════ -->
+    <section class="section" id="components">
+      <p class="section-label">Components</p>
+
+      <!-- ── Buttons ──────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Button — variants</span>
+        <div class="component-row">
+          <button class="btn btn--primary">Primary</button>
+          <button class="btn btn--secondary">Secondary</button>
+          <button class="btn btn--ghost">Ghost</button>
+          <button class="btn btn--subtle">Subtle</button>
+          <button class="btn btn--primary" disabled>Disabled</button>
+        </div>
+      </div>
+
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Button — sizes</span>
+        <div class="component-row" style="align-items:center">
+          <button class="btn btn--primary btn--sm">Small</button>
+          <button class="btn btn--primary">Medium</button>
+          <button class="btn btn--primary btn--lg">Large</button>
+        </div>
+      </div>
+
+      <!-- ── Badges ────────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Badge</span>
+        <div class="component-row">
+          <span class="badge badge--primary">Primary</span>
+          <span class="badge badge--accent">Accent</span>
+          <span class="badge badge--success">Success</span>
+          <span class="badge badge--warning">Warning</span>
+          <span class="badge badge--danger">Danger</span>
+          <span class="badge badge--neutral">Neutral</span>
+        </div>
+      </div>
+
+      <!-- ── Avatars ───────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Avatar</span>
+        <div class="avatar-row">
+          <div class="avatar avatar--lg">AB</div>
+          <div class="avatar avatar--md">AB</div>
+          <div class="avatar avatar--sm">AB</div>
+          <div class="avatar avatar--lg avatar--photo">IMG</div>
+          <div class="avatar avatar--md avatar--photo">IMG</div>
+          <div class="avatar avatar--sm avatar--photo">IMG</div>
+        </div>
+      </div>
+
+      <!-- ── Dividers ──────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Divider</span>
+        <div class="divider-stack">
+          <hr class="demo-hr">
+          <div class="demo-decorative">◆</div>
+        </div>
+      </div>
+
+      <!-- ── Inputs ────────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Input — states</span>
+        <div class="two-col">
+
+          <div class="form-group">
+            <label class="form-label" for="input-default">Field label</label>
+            <div class="input-wrapper">
+              <input class="input" id="input-default" type="text" placeholder="Default state — click to focus">
+            </div>
+            <span class="form-helper">Helper text goes here.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-error">Field label</label>
+            <div class="input-wrapper">
+              <input class="input input--error" id="input-error" type="text" placeholder="Invalid value" value="bad@value">
+            </div>
+            <span class="form-helper form-helper--error">This field is required.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-disabled">Disabled field</label>
+            <div class="input-wrapper">
+              <input class="input" id="input-disabled" type="text" placeholder="Disabled" disabled>
+            </div>
+            <span class="form-helper">You cannot edit this field.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-full">Full form group</label>
+            <div class="input-wrapper">
+              <input class="input" id="input-full" type="email" placeholder="you@example.com">
+            </div>
+            <span class="form-helper">We'll never share your email.</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Cards ─────────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Card — click to toggle active border</span>
+        <div class="card-grid">
+
+          <div class="card card--content" id="demo-card-1">
+            <div class="card__image" style="background:linear-gradient(135deg, #292818 0%, #48252F 100%)"></div>
+            <div class="card__body">
+              <h3 class="card__title">Content Card</h3>
+              <p class="card__text">A short description that sets the tone of the content within this card component.</p>
+              <a class="card__cta" href="#">Learn more →</a>
+            </div>
+          </div>
+
+          <div class="card card--content" id="demo-card-2">
+            <div class="card__image" style="background:linear-gradient(135deg, #32301F 0%, #857861 100%)"></div>
+            <div class="card__body">
+              <h3 class="card__title">Visual Direction</h3>
+              <p class="card__text">Refined, warm, and intentional. Every detail considered from background to border.</p>
+              <a class="card__cta" href="#">Explore →</a>
+            </div>
+          </div>
+
+          <div class="card card--feature">
+            <div class="card__accent"></div>
+            <div class="card__body">
+              <h3 class="card__title">Feature Card</h3>
+              <p class="card__text">Accent bar marks priority content. Sharp, editorial, uncluttered.</p>
+            </div>
+          </div>
+
+          <div class="card card--feature">
+            <div class="card__accent"></div>
+            <div class="card__body">
+              <h3 class="card__title">Second Feature</h3>
+              <p class="card__text">Use sparingly — this style draws the eye and demands hierarchy.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Navigation ────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Navigation bar</span>
+        <div class="nav-demo">
+          <nav class="nav">
+            <a class="nav__logo" href="#">Studio</a>
+            <ul class="nav__links">
+              <li><a class="nav__link" aria-current="page" href="#">Work</a></li>
+              <li><a class="nav__link" href="#">Process</a></li>
+              <li><a class="nav__link" href="#">About</a></li>
+              <li><a class="nav__link" href="#">Journal</a></li>
+            </ul>
+            <button class="btn btn--primary btn--sm">Get in touch</button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- ── Toast ─────────────────────────────────────── -->
+      <div class="component-group" style="margin-bottom:var(--space-8)">
+        <span class="group-label">Toast — trigger</span>
+        <div class="toast-triggers">
+          <button class="btn btn--subtle btn--sm" onclick="showToast('success')">Success toast</button>
+          <button class="btn btn--subtle btn--sm" onclick="showToast('error')">Error toast</button>
+          <button class="btn btn--subtle btn--sm" onclick="showToast('warning')">Warning toast</button>
+          <button class="btn btn--subtle btn--sm" onclick="showToast('info')">Info toast</button>
+        </div>
+      </div>
+
+      <!-- ── Modal ─────────────────────────────────────── -->
+      <div class="component-group">
+        <span class="group-label">Modal — trigger</span>
+        <div class="component-row">
+          <button class="btn btn--primary" id="open-modal">Open modal</button>
+          <button class="btn btn--ghost" id="open-modal-2">Open modal (ghost)</button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════ -->
+  <footer class="page">
+    <div class="footer">
+      <span class="footer__copy">Design System — built with care</span>
+      <span class="footer__copy">Cormorant Garamond · DM Sans</span>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       MODAL
+  ══════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <h2 class="modal__title" id="modal-title">Confirm Action</h2>
+      <p class="modal__body">
+        Are you sure you want to proceed? This action cannot be undone and
+        will permanently affect your settings.
+      </p>
+      <hr class="modal__divider">
+      <div class="modal__footer">
+        <button class="btn btn--ghost" id="close-modal">Cancel</button>
+        <button class="btn btn--primary" onclick="closeModal()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       TOAST STACK
+  ══════════════════════════════════════════════════════ -->
+  <div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════════════════ -->
+  <script src="src/interactions.js" defer></script>
+
+  <script>
+    /* ── Modal ─────────────────────────────────────────── */
+    const overlay   = document.getElementById("modal-overlay");
+    const openBtns  = ["open-modal", "open-modal-2", "open-modal-nav"]
+      .map(id => document.getElementById(id));
+
+    function openModal()  { overlay.classList.add("is-open"); }
+    function closeModal() { overlay.classList.remove("is-open"); }
+
+    openBtns.forEach(btn => btn && btn.addEventListener("click", openModal));
+    document.getElementById("close-modal").addEventListener("click", closeModal);
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    /* ── Toast ─────────────────────────────────────────── */
+    const stack = document.getElementById("toast-stack");
+
+    const toastContent = {
+      success: { title: "Success",  message: "Your changes have been saved." },
+      error:   { title: "Error",    message: "Something went wrong. Please try again." },
+      warning: { title: "Warning",  message: "This action may have consequences." },
+      info:    { title: "Info",     message: "Here's something worth knowing." },
+    };
+
+    function showToast(variant) {
+      const { title, message } = toastContent[variant];
+      const toast = document.createElement("div");
+      toast.className = `toast toast--${variant}`;
+      toast.innerHTML = `
+        <div class="toast__content">
+          <span class="toast__title">${title}</span>
+          <span class="toast__message">${message}</span>
+        </div>
+        <button class="toast__close" aria-label="Dismiss">✕</button>
+      `;
+
+      toast.querySelector(".toast__close").addEventListener("click", () => {
+        dismiss(toast);
+      });
+
+      stack.appendChild(toast);
+
+      // Auto-dismiss after 4 s
+      setTimeout(() => dismiss(toast), 4000);
+    }
+
+    function dismiss(toast) {
+      if (!toast.parentNode) return;
+      toast.style.transition = "opacity 250ms ease, transform 250ms ease";
+      toast.style.opacity    = "0";
+      toast.style.transform  = "translateX(16px)";
+      toast.addEventListener("transitionend", () => toast.remove(), { once: true });
+    }
+
+    /* ── Card active toggle ─────────────────────────────── */
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", () => card.classList.toggle("active"));
+    });
+  </script>
+
+</body>
+</html>

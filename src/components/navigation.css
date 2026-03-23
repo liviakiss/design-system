@@ -1,0 +1,53 @@
+/* Navigation Component */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  padding: 0 var(--space-8);
+  background-color: var(--color-background);
+  border-bottom: var(--border-nav);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ── Logo ───────────────────────────────────────────────── */
+
+.nav__logo {
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-cream);
+  text-decoration: none;
+}
+
+/* ── Links ──────────────────────────────────────────────── */
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+
+.nav__link:hover,
+.nav__link[aria-current="page"] {
+  color: var(--color-cream);
+}
